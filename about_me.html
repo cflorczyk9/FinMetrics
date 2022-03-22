@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubblz Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/style_am.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</head>
+<body>
+
+<!----header/home page----->
+
+    <section class = "header">
+        <nav>
+            <a href="/"><img class="img" src="{{url_for('static', filename='images/logo1.png')}}"></a>
+            <div class = "nav-links" id="navLinks">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+            <section class="enter-tickers">
+                <h1 id="Return">Example Calculations</h1>
+                <p>(Find the rest on <a href="https://github.com/cflorczyk9/Equity-Metrics-Website/find/main"
+                                        target="_blank" rel="noopener noreferrer" >Github</a>)</p>
+                <table>
+                  <tr>
+                    <td><h2>Import the necessary libraries</h2></td>
+                    <td>    import pandas as pd<br>
+                            from datetime import date<br>
+                            import yfinance as yf<br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><h2>Setting some variables that our functions will reference</h2></td>
+                    <td>
+                            <br>
+                            years = 1<br>
+                            end_date = date.today()<br>
+                            start_date = date.today() - pd.DateOffset(years=years)<br>
+                            ticker_id = "AAPL"<br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><h2>Function to pull the data</h2></td>
+                    <td>
+                                <br>
+                                def prepare_data_stock():<br>
+                                tickers = [ticker_id]<br>
+                                stock_data = yf.download(tickers, start_date, end_date)<br>
+                                return stock_data<br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><h2>This function transforms the data into daily percent returns and then takes the compound return</h2></td>
+                    <td>
+                                <br>
+                                def get_CAGR_stock():<br>
+                                df = prepare_data_stock()<br>
+                                df['daily_returns'] = df['Adj Close'].pct_change()<br>
+                                df['cumulative_returns'] = (1 + df['daily_returns']).cumprod()<br>
+                                trading_days = 252<br>
+                                n = len(df) / trading_days<br>
+                                cagr_stock = round((df['cumulative_returns'][-1]) ** (1 / n) - 1, 3)<br>
+                                return cagr_stock<br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><h2>Print the results</h2></td>
+                    <td>
+                        <br>
+                        print(f'%{get_CAGR_stock()*100}')
+                    </td>
+                  </tr>
+                </table>
+            </section>
+            <section class="enter-tickers">
+              <h1>About Me</h1>
+              <br>
+              <h3>Who am I?</h3>
+              <p>My name is Connor Florczyk. I graduated in 2020 with an undergraduate degree in Finance/Economics and I currently work in
+                  the wealth management industry.</p>
+              <br>
+              <h3>A few of my favorite academic papers</h3>
+              <table class="paper_list">
+                  <tr>
+                    <td><a href="https://german.yale.edu/sites/default/files/hayek_-_the_use_of_knowledge_in_society.pdf"
+                         target="_blank" rel="noopener noreferrer">The Use of Knowledge In Society (F. A. Hayek)</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://d1sh7ow6wurp05.cloudfront.net/The-Losers-Game-Charles-Ellis.1475679430256.pdf"
+                         target="_blank" rel="noopener noreferrer">The Losers Game (Charles D. Ellis)</a></a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://www.aeaweb.org/aer/top20/53.2.247-259.pdf"
+                         target="_blank" rel="noopener noreferrer">Capital Theory and Investment Behavior (Dale W. Jorgenson)</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://scholar.princeton.edu/sites/default/files/kahneman/files/maps_bounded_rationality_dk_2003.pdf"
+                         target="_blank" rel="noopener noreferrer">Maps of Bounded Rationality: Psychology for Behavioral Economics (Daniel Kahneman)</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://www8.gsb.columbia.edu/programs/sites/programs/files/finance/Finance%20Seminar/spring%202014/ken%20french.pdf"
+                         target="_blank" rel="noopener noreferrer">A Five-Factor Asset Pricing Model (Eugene F. Fama & Kenneth R. French)</a></td>
+                  </tr>
+              </table>
+              <br>
+              <h3>And a some books</h3>
+              <table class="paper_list">
+                  <tr>
+                    <td>The Incredible Shrinking Alpha (Larry E. Swedroe)</td>
+                  </tr>
+                  <tr>
+                    <td>Fooled by Randomness (Nassim Nicholas Taleb)</a></a></td>
+                  </tr>
+                  <tr>
+                    <td>Irrational Exuberance (Robert J. Shiller)</a></td>
+                  </tr>
+                  <tr>
+                    <td>A Random Walk Down Wall Street (Burton G. Malkiel)</a></td>
+                  </tr>
+                  <tr>
+                    <td>Liar’s Poker (Michael Lewis)</a></td>
+                  </tr>
+              </table>
+            </section>
+
+
+<!----footer----->
+
+    <section class="footer">
+        <div class="icon">
+          <a href="https://www.linkedin.com/in/connor-florczyk/" target="_blank" rel="noopener noreferrer" >
+              <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+          <a href="/"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+          <a href="/"><i class="fa fa-github" aria-hidden="true"></i></i></a>
+        </div>
+        <p class="copyright">Connor Florczyk © 2021</p>
+    </section>
+
+</body>
+</html>

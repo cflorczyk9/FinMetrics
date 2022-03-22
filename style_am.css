@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'EB Garamond', serif;
+}
+
+.header{
+    min-height: 10vh;
+    width: 100%;
+    background: #1D735A;
+}
+
+nav{
+    display: flex;
+    padding: 1% 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img{
+    position: relative;
+    width: 65px;
+}
+
+.nav-links{
+    flex: 1;
+    text-align: right;
+    z-index: 99;
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+}
+
+.nav-links ul li a{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #FFFFFF;
+    display: block;
+    margin: auto;
+    transition: 0.3s;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+
+
+input[type=text]:focus {
+  background-color: #B5D1C9;
+}
+
+h1{
+    font-size: 30px;
+    font-weight: 600;
+    color: #1D735A;
+    text-align: center;
+}
+
+h2{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px;
+}
+
+h2{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    width: 75%;
+}
+
+p{
+    text-align: center;
+}
+
+iframe{
+  width: 100%;
+  min-height: 65vh;
+  overflow: auto;
+  display: block;
+}
+
+.icons .fa{
+    color: #f44336;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+}
+.fa-linkedin-square{
+    color: #FFFFFF;
+}
+
+.fa-envelope{
+    color: #FFFFFF;
+}
+
+.fa-github{
+    color: #FFFFFF;
+}
+
+.row {
+  display: flex;
+  min-height: 70vh;
+}
+
+.column {
+  flex: 50%;
+  padding: 10px;
+  min-height: 90vh;
+}
+
+.paper_list {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.footer{
+    width: 100%;
+    background: #1D735A;
+    text-align: center;
+    padding: 10px 0;
+}
+
+table{
+  border-collapse: collapse;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 0;
+}
+
+.enter-tickers tr:hover{
+    background-color: #f2f2f2;
+}

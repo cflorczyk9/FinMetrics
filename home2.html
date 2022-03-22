@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubblz Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+<body>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Back to Top</button>
+
+<!----header/home page----->
+
+    <section class = "header">
+            <div class="color_overlay"></div>
+            <nav>
+                <a href="/"><img class="img" src="{{url_for('static', filename='images/logo1.png')}}"></a>
+                <div class = "nav-links" id="navLinks">
+                  <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="home">Home</a></li>
+                        <li><a href="#Return">Return</a></li>
+                        <li><a href="#Metrics">Metrics</a></li>
+                        <li><a href="#Monte_Carlo">Monte Carlo</a></li>
+                        <li><a href="about_me">About</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+        <div class = "text-box">
+            <h1>Bubblz</h1>
+            <p>This website was created for the average person to quickly and easily understand risk and return matrics assosiated with a single stock.<br>
+                Simply enter the ticker and explore your investment.</p>
+        </div>
+        <div class = "photo-credits">
+            <a href="https://ivebenthinking.substack.com/" target="_blank" rel="noopener noreferrer">
+                <p>Photo by Benjamin Testani</p></a>
+        </div>
+    </section>
+
+<!----user input----->
+
+
+    <section class="enter-tickers2">
+      <h1>User Inputs</h1>
+      <p>(Data goes back as far as possible - Since IPO)</p>
+        <div>
+            <h1>{{usr}}</h1>
+        </div>
+    </section>
+    <section class="curve">
+        <div class="form-style-5">
+            <form>
+                <fieldset>
+                <legend><span class="number">1</span> Enter a Ticker</legend>
+                <input type="text" name="usr" placeholder="AAPL *">
+                <legend><span class="number">2</span> Choose Your Benchmark</legend>
+                <label for="job">Benchmark:</label>
+                <select id="job" name="field4">
+                <optgroup label="Equities">
+                  <option name="benchmark_id" value="^GSPC">S&P 500</option>
+                  <option name="benchmark_id" value="^RUT">Russell 2000</option>
+                  <option name="benchmark_id" value="MME=F">MSCI Emerging Markets</option>
+                  <option name="benchmark_id" value="MWL=F">MSCI World</option>
+                  <option name="benchmark_id" value="MMW=F">MSCI ACWI</option>
+                  <option name="benchmark_id" value="MFS=F">MSCI EAFE</option>
+                </optgroup>
+                <optgroup label="Fixed Income/Other">
+                  <option name="benchmark_id" value="^TNX">Treasury Yield 10 Years</option>
+                  <option name="benchmark_id" value="BNDS">Barclays Aggregate Bond</option>
+                  <option name="benchmark_id" value="^CMC200">CMC Crypto 200 Index</option>
+                  <option name="benchmark_id" value="^DJUBSTR">DJ UBS Commodity Index</option>
+                </optgroup>
+                </select>
+                <input type="submit" value="Lets Go" />
+            </form>
+        </div>
+    </section>
+<!----historical return vs benchmark----->
+
+    <section class="enter-tickers">
+        <h1 id="Return">Your Equities Historical Return</h1>
+        <img class="img" src="{{url_for('static', filename='images/chart1.png')}}">
+    </section>
+
+<!----portfolio metrics----->
+
+    <section class="enter-tickers" id="ratios">
+        <h1 id="Metrics">Equity Metrics</h1>
+        <br>
+        <table>
+          <tr>
+            <th>Ratio</th>
+            <th>Value</th>
+            <th>What is this?</th>
+            <th>Formula</th>
+          </tr>
+          <tr>
+            <td><h3>CAGR</h3></td>
+            <td>{{CAGR_stock}}</td>
+            <td>The compound annual growth rate is the mean annual growth rate of an investment over a specified
+                period of time longer than one year.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/CAGR.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Volatility</h3></td>
+            <td>{{volatility}}</td>
+            <td>Volatility is a statistical measure of the dispersion of returns for a given security or market index.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/Volatility.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Beta</h3></td>
+            <td>{{correlation}}</td>
+            <td>Beta is a measure of the systematic risk of a security compared to a benchmark.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/Beta-Formula.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Alpha</h3></td>
+            <td>{{alpha}}</td>
+            <td>The excess return of an investment relative to the return of a benchmark index.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/Volatility.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Sharpe Ratio</h3></td>
+            <td>{{sharpe}}</td>
+            <td>The Sharpe Ratio describes how much excess return you receive for the extra volatility you endure for
+                holding a riskier asset.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/sharpe-ratio.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Sortino Ratio</h3></td>
+            <td>{{sortino}}</td>
+            <td>The Sortino ratio is a variation of the Sharpe ratio that uses the asset's negative standard deviation
+                (downside deviation) instead of the total standard deviation of returns.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/sharpe-ratio.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Calmar Ratio</h3></td>
+            <td>{{calmar}}</td>
+            <td>The Calmar Ratio is used in measuring the performance of an investment by comparing the annual
+                compounded rate of return and the maximum drawdown risk of the investment. </td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/calmer.jpg')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Maximum Drawdown</h3></td>
+            <td>{{maximum_drawdown}}</td>
+            <td>Maximum Drawdown is the maximum observed loss from a peak to a trough of a portfolio, before a new peak
+                is attained.</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/mdd.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Value At Risk (Var) - 90%</h3></td>
+            <td>{{VaR_90}}</td>
+            <td>VaR is a way to quantify the risk of potential losses for an investment (90% Confidence Level).</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/var.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Value At Risk (Var) - 95%</h3></td>
+            <td>{{VaR_95}}</td>
+            <td>VaR is a way to quantify the risk of potential losses for an investment (95% Confidence Level).</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/var.png')}}"></td>
+          </tr>
+          <tr>
+            <td><h3>Value At Risk (Var) - 99%</h3></td>
+            <td>{{VaR_99}}</td>
+            <td>VaR is a way to quantify the risk of potential losses for an investment (99% Confidence Level).</td>
+            <td><img class="img_formula" src="{{url_for('static', filename='images/var.png')}}"></td>
+          </tr>
+        </table>
+    </section>
+
+<!----monte carlo simulation----->
+
+    <section class="enter-tickers">
+        <h1 id="Monte_Carlo">Monte Carlo Simulation</h1>
+        <h2>The Simulation</h2>
+            <img class="img" src="{{url_for('static', filename='images/chart2.jpg')}}">
+        <h2>The Results</h2>
+            <img class="img" src="{{url_for('static', filename='images/chart3.jpg')}}">
+    </section>
+<!----portfolio metrics----->
+
+<!----footer----->
+
+    <section class="footer">
+        <div class="icon">
+          <a href="https://www.linkedin.com/in/connor-florczyk/" target="_blank" rel="noopener noreferrer" >
+              <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+          <a href="/"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+          <a href="/"><i class="fa fa-github" aria-hidden="true"></i></i></a>
+        </div>
+        <p class="copyright">Connor Florczyk © 2021</p>
+    </section>
+
+    <script>
+
+    var mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+    </script>
+
+
+</body>
+</html>
